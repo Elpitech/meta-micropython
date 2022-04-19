@@ -49,6 +49,6 @@ Add MicroPython as a dependency in recipe with `RDEPENDS` (for runtime) or `DEPE
 
 ```bitbake
 	DEPENDS += " micropython"
-	RDEPENDS_${PN} += " micropython"
+	RDEPENDS:${PN} += " micropython"
 ```
 

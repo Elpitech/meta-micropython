@@ -14,11 +14,11 @@ SRC_URI = " \
 	https://github.com/micropython/micropython-lib/archive/v${PV}.tar.gz;name=src \
 "
 
-SRC_URI[src.md5sum] = "e0b313e7d6378f52607844fd30d79630"
-SRC_URI[src.sha256sum] = "eb696009ff8c33004211e484649b34edb14f3efb2ff618942bc8888716757a55"
+SRC_URI[src.md5sum] = "1752ce13e851a671a07ce3f7a807b21c"
+SRC_URI[src.sha256sum] = "66e15380eb109613263beb6825b8eecb9191088270c1a59e8c7d922dd57183c7"
 
-RDEPENDS_${PN} = "micropython"
-RDEPENDS_${PN}-native = "micropython-native"
+RDEPENDS:${PN} = "micropython"
+RDEPENDS:${PN}-native = "micropython-native"
 
 do_compile() {
 	:
@@ -34,7 +34,7 @@ do_install() {
 	cp -r --preserve=mode,links ${B}/* ${D}${libdir}/micropython/
 }
 
-FILES_${PN} = " \
+FILES:${PN} = " \
 	${libdir}/micropython/* \
 "
 

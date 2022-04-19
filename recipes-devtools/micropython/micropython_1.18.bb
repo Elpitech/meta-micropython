@@ -3,7 +3,7 @@ HOMEPAGE = "https://micropython.org"
 SECTION = "devel/python"
 
 LICENSE = "MIT"
-LIC_FILES_CHKSUM = "file://LICENSE;md5=a8a14efdd86622bc2a34296228779da7"
+LIC_FILES_CHKSUM = "file://LICENSE;md5=4b02e342e2322140ca59cf5d996e487a"
 
 inherit autotools-brokensep
 
@@ -11,24 +11,23 @@ INC_PR = "r1"
 PR = "${INC_PR}.0"
 
 SRC_URI = " \
-	gitsm://github.com/micropython/micropython.git;name=src;tag=v${PV} \
+		   git://github.com/micropython/micropython.git;name=src;protocol=http;tag=v${PV} \
 "
 
 S = "${WORKDIR}/git"
 
-DEPENDS = "libffi"
-
-CPPFLAGS_append = " -Wno-error"
+DEPENDS = "libffi coreutils-native python3-native"
 
 EXTRA_OEMAKE = " \
-	-C ${S}/unix \
+	-C ${S}/ports/unix \
 	MICROPY_USE_READLINE=0 \
+	MICROPY_MPYCROSS= \
+	FROZEN_MANIFEST= \
 	V=1 \
-	DESTDIR="${D}" \
 	CC="${CC}" \
 	LD="${LD}" \
 	CROSS_COMPILE="${TARGET_PREFIX}" \
-	PREFIX="${D}/usr" \
+	PREFIX="/usr" \
 "
 
 do_compile() {
@@ -40,9 +39,12 @@ do_configure() {
 	:
 }
 
-RRECOMMENDS_${PN} = "micropython-lib"
+FILES:${PN} = " \
+	${bindir}/micropython \
+"
 
-INSANE_SKIP_${PN} = "already-stripped"
+RRECOMMENDS:${PN} = "micropython-lib"
+
+INSANE_SKIP:${PN} = "already-stripped"
 
 BBCLASSEXTEND = "native"
-

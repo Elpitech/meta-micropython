@@ -12,7 +12,7 @@ SRC_URI = " \
         gitsm://github.com/pfalcon/micropython-serial.git;name=src \
 "
 
-SRCREV = "d1b9337954adb388409adf543aeb3be5b5e6b0a6"
+SRCREV = "d6bd0b97d78b8a9f95c1c213ee59f0b87ae9843f"
 
 S = "${WORKDIR}/git"
 
@@ -29,10 +29,10 @@ do_install() {
 	cp -r --preserve=mode,links ${S}/serial.py ${D}${libdir}/micropython/
 }
 
-FILES_${PN} = " \
+FILES:${PN} = " \
 	${libdir}/micropython/serial.py \
 "
 
-RDEPENDS_${PN} = "micropython micropython-lib"
+RDEPENDS:${PN} = "micropython micropython-lib"
 
 BBCLASSEXTEND = "native"
